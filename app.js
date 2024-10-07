@@ -3,8 +3,6 @@ import * as chat from '@botpress/chat';
 import dotenv from 'dotenv';
 dotenv.config();
 
-
-
 const app = express();
 app.use(express.json());
 
@@ -27,6 +25,11 @@ const initializeClient = async () => {
     console.error('Error connecting to Botpress Client:', error);
   }
 };
+
+// Endpoint para verificar el estado de la API
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', message: 'API is running' });
+});
 
 // Endpoint para enviar un mensaje al bot
 app.post('/send-message', async (req, res) => {
